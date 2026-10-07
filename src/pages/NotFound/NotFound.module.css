@@ -1,0 +1,31 @@
+.container {
+  padding-block: var(--space-5xl);
+  max-width: var(--max-text-width);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.code {
+  font-family: var(--display);
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 800;
+  color: var(--blood);
+  line-height: 1;
+  margin-bottom: var(--space-md);
+}
+
+.heading {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-md);
+}
+
+.description {
+  color: var(--dim);
+  font-size: 1.2rem;
+  margin-bottom: var(--space-2xl);
+  line-height: 1.6;
+}
+
+.homeBtn {
+  display: inline-flex;
+}
