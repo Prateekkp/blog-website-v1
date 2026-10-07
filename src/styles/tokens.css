@@ -1,0 +1,58 @@
+:root {
+  color-scheme: dark;
+
+  /* Color Palette */
+  --blood: #e8262b;
+  --blood-deep: #7d1216;
+  --soot: #140809;
+  --char: #201012;
+  --ash: #e6d6d1;
+  --dim: #b09a95;
+  --line: #3a1d20;
+  --white: #ffffff;
+  --chip-border: #5a2f33;
+  --post-excerpt: #cdbab5;
+
+  /* Typography */
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --serif: "Source Serif 4", Georgia, serif;
+
+  /* Layout & Spacing */
+  --gutter: 1.25rem;
+  --max-text-width: 70ch;
+  --sidebar-width: 340px;
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.45rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.25rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+  --space-3xl: 2.5rem;
+  --space-4xl: 3rem;
+  --space-5xl: 3.5rem;
+
+  /* Borders */
+  --border-thin: 1px solid var(--line);
+  --border-thick: 4px solid var(--blood);
+  --border-chip: 1px solid var(--chip-border);
+
+  /* Shadows */
+  --shadow-nav: 0 1px 10px rgba(20, 8, 9, 0.6);
+  --shadow-hero: 0 1px 14px rgba(20, 8, 9, 0.9);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  /* Accessible Touch Targets */
+  --touch-target-min: 44px;
+
+  /* Safe Area Insets */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
