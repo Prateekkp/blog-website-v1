@@ -1,0 +1,36 @@
+.box {
+  background-color: var(--char);
+  border-left: var(--border-thick);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.heading {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.45rem;
+  margin: 0 0 0.75rem;
+  color: var(--ash);
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.item {
+  padding: 0.45rem 0;
+  border-bottom: var(--border-thin);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.link {
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--blood);
+}

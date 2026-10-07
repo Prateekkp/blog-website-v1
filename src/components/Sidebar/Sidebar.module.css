@@ -1,0 +1,10 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 900px) {
+  .sidebar {
+    width: 340px;
+  }
+}

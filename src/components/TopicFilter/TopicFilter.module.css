@@ -1,0 +1,38 @@
+.topics {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-block: 1.25rem;
+  border-bottom: var(--border-thin);
+  position: sticky;
+  top: 0;
+  background-color: var(--soot);
+  z-index: 5;
+}
+
+.chip {
+  background: none;
+  border: var(--border-chip);
+  color: var(--ash);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.35rem 1.1rem;
+  min-height: var(--touch-target-min);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast),
+    border-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip:hover {
+  background-color: var(--char);
+}
+
+.chip[aria-pressed='true'] {
+  background-color: var(--white);
+  color: var(--soot);
+  border-color: var(--white);
+}

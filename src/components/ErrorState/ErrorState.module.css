@@ -1,0 +1,23 @@
+.container {
+  padding: 3rem var(--gutter);
+  text-align: center;
+  background-color: var(--char);
+  border-left: var(--border-thick);
+  margin-block: 2rem;
+}
+
+.title {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.message {
+  color: var(--dim);
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  display: inline-block;
+}

@@ -1,0 +1,30 @@
+.section {
+  padding-block: var(--space-5xl) 0;
+}
+
+.heading {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.05;
+  margin: 0 0 1.5rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3xl);
+}
+
+.empty {
+  color: var(--dim);
+  padding: 2rem 0;
+}
+
+/* Desktop layout at 900px */
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr var(--sidebar-width);
+    gap: 3.5rem;
+  }
+}

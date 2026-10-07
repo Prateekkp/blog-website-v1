@@ -1,0 +1,50 @@
+.post {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  padding: 1.75rem 0;
+  border-top: var(--border-thin);
+}
+
+.time {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--dim);
+}
+
+.content {
+  display: block;
+}
+
+.title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+  color: var(--ash);
+  transition: color var(--transition-fast);
+}
+
+.post:hover .title {
+  color: var(--blood);
+}
+
+.excerpt {
+  margin: 0 0 0.5rem;
+  color: var(--post-excerpt);
+  max-width: 46rem;
+}
+
+.footer {
+  margin-top: 0.25rem;
+}
+
+/* Desktop enhancement at 900px */
+@media (min-width: 900px) {
+  .post {
+    grid-template-columns: 7rem 1fr;
+    gap: 1.5rem;
+  }
+}

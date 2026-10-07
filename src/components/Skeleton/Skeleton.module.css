@@ -1,0 +1,43 @@
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--char) 25%,
+    rgba(58, 29, 32, 0.6) 50%,
+    var(--char) 75%
+  );
+  background-size: 200% 100%;
+  animation: pulse 1.8s infinite;
+  border-radius: 2px;
+}
+
+.item {
+  padding: 1.75rem 0;
+  border-top: var(--border-thin);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lineTitle {
+  height: 1.8rem;
+  width: 75%;
+}
+
+.lineText {
+  height: 1.1rem;
+  width: 90%;
+}
+
+.lineMeta {
+  height: 0.9rem;
+  width: 35%;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
