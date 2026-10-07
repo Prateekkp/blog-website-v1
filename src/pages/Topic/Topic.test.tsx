@@ -22,8 +22,10 @@ describe('Topic Page', () => {
       ).toBeInTheDocument();
     });
 
-    expect(
-      screen.getByText(/A practical zero-trust rollout for a 50-person company/i)
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByText(/A practical zero-trust rollout for a 50-person company/i)
+      ).toBeInTheDocument();
+    });
   });
 });

@@ -30,13 +30,19 @@ export const TopStories: React.FC<TopStoriesProps> = ({ posts }) => {
         </article>
 
         <div className={styles.sideList}>
-          {sideItems.map((post) => (
+          {sideItems.map((post, idx) => (
             <article key={post.id} className={styles.item}>
-              <Link to={`/post/${post.slug}`} className={styles.itemLink}>
+              <div className={styles.itemHeader}>
+                <span className={styles.badge}>0{idx + 1}</span>
                 <span className="tag">{post.category}</span>
+              </div>
+              <Link to={`/post/${post.slug}`} className={styles.itemLink}>
                 <h3 className={styles.itemTitle}>{post.title}</h3>
               </Link>
               <p className={styles.itemExcerpt}>{post.excerpt}</p>
+              <div className={`meta ${styles.itemMeta}`}>
+                {post.readingTimeMin} min read
+              </div>
             </article>
           ))}
         </div>

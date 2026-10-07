@@ -1,0 +1,59 @@
+.container {
+  background-color: var(--soot);
+  border-block: var(--border-thin);
+  padding-block: var(--space-2xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quoteWrapper {
+  max-width: 54rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.quote {
+  margin: 0;
+  padding: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 3.2vw, 2.2rem);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.mark {
+  color: var(--blood);
+  font-size: 1.2em;
+  line-height: 0;
+  display: inline-block;
+  vertical-align: -0.1em;
+}
+
+.markLeft {
+  margin-right: 0.35rem;
+}
+
+.markRight {
+  margin-left: 0.35rem;
+}
+
+.caption {
+  display: block;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-top: var(--space-sm);
+}
+
+@media (min-width: 900px) {
+  .container {
+    padding-block: var(--space-3xl);
+  }
+}

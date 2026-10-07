@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Hero } from '../../components/Hero/Hero';
+import { ManifestoQuote } from '../../components/ManifestoQuote/ManifestoQuote';
 import { TopicFilter } from '../../components/TopicFilter/TopicFilter';
 import { TopStories } from '../../components/TopStories/TopStories';
 import { ArticleListItem } from '../../components/ArticleListItem/ArticleListItem';
@@ -107,6 +108,8 @@ export const Home: React.FC = () => {
       </Helmet>
 
       <Hero onCtaClick={handleHeroCta} />
+
+      <ManifestoQuote />
 
       <TopicFilter
         categories={categories}

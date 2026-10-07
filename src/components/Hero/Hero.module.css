@@ -7,19 +7,19 @@
   background-color: var(--soot);
   background-repeat: no-repeat;
   background-size: 100% 100%, cover;
-  /* Mobile-first: position tuned so Batman's face right of center stays visible */
-  background-position: center top, 62% 20%;
+  /* Mobile-first: Batman perfectly centered horizontally with full cowl and chest in view */
+  background-position: center top, 49% top;
   background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-    url('../../assets/batman-640.webp');
+    url('../../assets/batman-1920.webp');
   background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
     -webkit-image-set(
-      url('../../assets/batman-640.avif') type('image/avif'),
-      url('../../assets/batman-640.webp') type('image/webp')
+      url('../../assets/batman-1920.avif') type('image/avif'),
+      url('../../assets/batman-1920.webp') type('image/webp')
     );
   background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
     image-set(
-      url('../../assets/batman-640.avif') type('image/avif'),
-      url('../../assets/batman-640.webp') type('image/webp')
+      url('../../assets/batman-1920.avif') type('image/avif'),
+      url('../../assets/batman-1920.webp') type('image/webp')
     );
 }
 
@@ -49,27 +49,14 @@
 /* Tablet Enhancement at 600px */
 @media (min-width: 600px) {
   .hero {
-    background-position: center top, 58% 25%;
-    background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-      url('../../assets/batman-1024.webp');
-    background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-      image-set(
-        url('../../assets/batman-1024.avif') type('image/avif'),
-        url('../../assets/batman-1024.webp') type('image/webp')
-      );
+    background-position: center top, 47% top;
   }
 }
 
 /* Desktop Enhancement at 900px */
 @media (min-width: 900px) {
   .hero {
-    background-position: center top, center center;
-    background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-      url('../../assets/batman-1920.webp');
-    background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-      image-set(
-        url('../../assets/batman-1920.avif') type('image/avif'),
-        url('../../assets/batman-1920.webp') type('image/webp')
-      );
+    /* Full bleed from top: 0 with zero black bar, Batman cowl comfortably below navbar */
+    background-position: center top, center top;
   }
 }
