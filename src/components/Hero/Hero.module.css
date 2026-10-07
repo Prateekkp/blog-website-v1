@@ -11,16 +11,7 @@
   background-position: center top, 49% top;
   background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
     url('../../assets/batman-1920.webp');
-  background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-    -webkit-image-set(
-      url('../../assets/batman-1920.avif') type('image/avif'),
-      url('../../assets/batman-1920.webp') type('image/webp')
-    );
-  background-image: linear-gradient(to top, var(--soot) 0%, transparent 40%),
-    image-set(
-      url('../../assets/batman-1920.avif') type('image/avif'),
-      url('../../assets/batman-1920.webp') type('image/webp')
-    );
+  
 }
 
 .copy {
