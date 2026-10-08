@@ -20,14 +20,16 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   const containerRef = useFocusTrap(isOpen, onClose);
   useScrollLock(isOpen);
 
-  const initialLocation = useRef(location.pathname + location.search);
+  // Track location to close menu on route change only when open
+  const prevLocationRef = useRef(location.pathname + location.search);
 
-  // Close when route changes
   useEffect(() => {
     const currentLocation = location.pathname + location.search;
-    if (isOpen && initialLocation.current !== currentLocation) {
-      initialLocation.current = currentLocation;
-      onClose();
+    if (prevLocationRef.current !== currentLocation) {
+      prevLocationRef.current = currentLocation;
+      if (isOpen) {
+        onClose();
+      }
     }
   }, [isOpen, location.pathname, location.search, onClose]);
 
@@ -57,6 +59,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation Menu"
+      tabIndex={-1}
     >
       <div className={styles.header}>
         <Link to="/" className={styles.logo} onClick={handleLinkClick}>

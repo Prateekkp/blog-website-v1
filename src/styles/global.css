@@ -4,6 +4,17 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--blood);
+  color: var(--white);
+}
+
+::-moz-selection {
+  background: var(--blood);
+  color: var(--white);
 }
 
 html {
@@ -38,6 +49,10 @@ body {
 }
 
 /* Accessibility Focus Ring */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -184,5 +199,11 @@ h3 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

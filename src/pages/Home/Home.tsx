@@ -20,9 +20,9 @@ const LATEST_POSTS_LIMIT = 5;
 
 export const Home: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [posts, setPosts] = useState<Post[]>(() => getCachedPosts() || []);
-  const [popularPosts, setPopularPosts] = useState<Post[]>(() => getCachedPopularPosts() || []);
-  const [isLoading, setIsLoading] = useState(() => !getCachedPosts());
+  const [posts, setPosts] = useState<Post[]>(() => getCachedPosts());
+  const [popularPosts, setPopularPosts] = useState<Post[]>(() => getCachedPopularPosts());
+  const [isLoading, setIsLoading] = useState(() => getCachedPosts().length === 0);
   const [error, setError] = useState<string | null>(null);
 
   const categories = useMemo(() => {
@@ -51,7 +51,7 @@ export const Home: React.FC = () => {
   }, [topicParam, categories]);
 
   const loadData = useCallback(async () => {
-    if (!getCachedPosts()) {
+    if (getCachedPosts().length === 0) {
       setIsLoading(true);
     }
     setError(null);

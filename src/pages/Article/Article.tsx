@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigationType } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { getPostBySlug, getPostsByCategory } from '../../services/api';
+import {
+  getPostBySlug,
+  getPostsByCategory,
+  getCachedPostBySlug,
+  getCachedPostsByCategory,
+} from '../../services/api';
 import { Post } from '../../types/post';
 import { formatDateFull } from '../../utils/formatDate';
 import { slugify } from '../../utils/slugify';
@@ -14,17 +19,29 @@ import styles from './Article.module.css';
 export const Article: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navType = useNavigationType();
-  const [post, setPost] = useState<Post | null>(null);
-  const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const [post, setPost] = useState<Post | null>(() =>
+    slug ? getCachedPostBySlug(slug) : null
+  );
+  const [relatedPosts, setRelatedPosts] = useState<Post[]>(() => {
+    const cached = slug ? getCachedPostBySlug(slug) : null;
+    if (!cached) return [];
+    return getCachedPostsByCategory(cached.category)
+      .filter((p) => p.slug !== cached.slug)
+      .slice(0, 2);
+  });
+  const [isLoading, setIsLoading] = useState(() => (slug ? !getCachedPostBySlug(slug) : false));
 
   useEffect(() => {
     let isMounted = true;
-    setIsLoading(true);
-
     if (!slug) {
       setIsLoading(false);
       return;
+    }
+
+    const cached = getCachedPostBySlug(slug);
+    if (!cached) {
+      setIsLoading(true);
     }
 
     getPostBySlug(slug).then((fetchedPost) => {

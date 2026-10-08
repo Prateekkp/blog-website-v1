@@ -20,9 +20,15 @@ export function useFocusTrap(isActive: boolean, onClose?: () => void) {
         (el) => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0
       );
 
-    const focusables = getFocusables();
-    if (focusables.length > 0) {
-      focusables[0].focus();
+    // Focus close button or container to avoid highlighting the logo or jumping scroll
+    const closeBtn = container.querySelector<HTMLElement>('button[aria-label*="close" i]');
+    if (closeBtn) {
+      closeBtn.focus({ preventScroll: true });
+    } else {
+      const focusables = getFocusables();
+      if (focusables.length > 0) {
+        focusables[0].focus({ preventScroll: true });
+      }
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
