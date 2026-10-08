@@ -78,4 +78,22 @@ describe('Home Page Topic Filtering', () => {
       })
     ).toBeInTheDocument();
   });
+
+  it('renders exactly 5 articles in the latest articles list on initial load', async () => {
+    render(
+      <HelmetProvider>
+        <MemoryRouter initialEntries={['/']}>
+          <Home />
+        </MemoryRouter>
+      </HelmetProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByLabelText(/loading content/i)).not.toBeInTheDocument();
+    });
+
+    const latestSection = screen.getByRole('region', { name: /latest articles/i });
+    const articles = latestSection.querySelectorAll('article');
+    expect(articles).toHaveLength(5);
+  });
 });

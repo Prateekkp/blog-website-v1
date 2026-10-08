@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useScrollLock } from '../../hooks/useScrollLock';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
+import { MAIN_NAV_ITEMS } from '../../config/navigation';
 import styles from './MobileMenu.module.css';
 
 export interface MobileMenuProps {
@@ -36,6 +37,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
     onClose();
   };
 
+  const handleHashClick = (targetId: string) => {
+    onClose();
+    if (location.pathname === '/') {
+      const el = document.getElementById(targetId);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      }
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -61,31 +74,33 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
       <nav className={styles.nav} aria-label="Mobile Main">
         <ul className={styles.navList}>
-          <li>
-            <a href="/#top" className={styles.navLink} onClick={handleLinkClick}>
-              Top stories
-            </a>
-          </li>
-          <li>
-            <a href="/#latest" className={styles.navLink} onClick={handleLinkClick}>
-              Latest
-            </a>
-          </li>
-          <li>
-            <Link to="/about" className={styles.navLink} onClick={handleLinkClick}>
-              About
-            </Link>
-          </li>
+          {MAIN_NAV_ITEMS.map((item) => (
+            <li key={item.label}>
+              <Link
+                to={item.href}
+                className={styles.navLink}
+                onClick={() => {
+                  if (item.href.includes('#')) {
+                    handleHashClick(item.href.split('#')[1]);
+                  } else {
+                    handleLinkClick();
+                  }
+                }}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         <div className={styles.subscribeContainer}>
-          <a
-            href="/#subscribe"
+          <Link
+            to="/#subscribe"
             className={`btn ${styles.subscribeBtn}`}
-            onClick={handleLinkClick}
+            onClick={() => handleHashClick('subscribe')}
           >
             Subscribe
-          </a>
+          </Link>
         </div>
       </nav>
     </div>

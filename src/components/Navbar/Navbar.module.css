@@ -75,9 +75,22 @@
 }
 
 .subscribeBtn {
-  padding: 0.45rem 1.2rem;
-  font-size: 1.1rem;
+  background: transparent;
+  color: var(--white);
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.3rem 0;
+  font-size: 1.2rem;
+  min-height: var(--touch-target-min);
   display: none;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.subscribeBtn:hover {
+  background: transparent;
+  color: var(--white);
+  border-color: transparent;
+  border-bottom-color: var(--white);
 }
 
 /* Desktop Enhancements at 900px */

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
+import { MAIN_NAV_ITEMS } from '../../config/navigation';
 import styles from './Navbar.module.css';
 
 export interface NavbarProps {
@@ -11,12 +12,15 @@ export const Navbar: React.FC<NavbarProps> = ({ isInnerPage = false }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const handleSubscribeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleHashNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
     if (location.pathname === '/') {
-      const subscribeEl = document.getElementById('subscribe');
-      if (subscribeEl) {
+      const el = document.getElementById(targetId);
+      if (el) {
         e.preventDefault();
-        subscribeEl.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
@@ -33,32 +37,32 @@ export const Navbar: React.FC<NavbarProps> = ({ isInnerPage = false }) => {
 
         <nav className={styles.desktopNav} aria-label="Main">
           <ul className={styles.desktopList}>
-            <li>
-              <a href="/#top" className={styles.desktopLink}>
-                Top stories
-              </a>
-            </li>
-            <li>
-              <a href="/#latest" className={styles.desktopLink}>
-                Latest
-              </a>
-            </li>
-            <li>
-              <Link to="/about" className={styles.desktopLink}>
-                About
-              </Link>
-            </li>
+            {MAIN_NAV_ITEMS.map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.href}
+                  className={styles.desktopLink}
+                  onClick={(e) => {
+                    if (item.href.includes('#')) {
+                      handleHashNavClick(e, item.href.split('#')[1]);
+                    }
+                  }}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <div className={styles.actions}>
-          <a
-            href="/#subscribe"
+          <Link
+            to="/#subscribe"
             className={`btn ${styles.subscribeBtn}`}
-            onClick={handleSubscribeClick}
+            onClick={(e) => handleHashNavClick(e, 'subscribe')}
           >
             Subscribe
-          </a>
+          </Link>
 
           <button
             type="button"

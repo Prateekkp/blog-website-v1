@@ -10,22 +10,32 @@ import { Sidebar } from '../../components/Sidebar/Sidebar';
 import { AboutBand } from '../../components/AboutBand/AboutBand';
 import { Skeleton } from '../../components/Skeleton/Skeleton';
 import { ErrorState } from '../../components/ErrorState/ErrorState';
-import { getPosts, getPopularPosts } from '../../services/api';
+import { getPosts, getPopularPosts, getCachedPosts, getCachedPopularPosts } from '../../services/api';
 import { Post } from '../../types/post';
 import { slugify, categoryFromSlug } from '../../utils/slugify';
+import { getAllTopicNames } from '../../config/topics';
 import styles from './Home.module.css';
+
+const LATEST_POSTS_LIMIT = 5;
 
 export const Home: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [popularPosts, setPopularPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [posts, setPosts] = useState<Post[]>(() => getCachedPosts() || []);
+  const [popularPosts, setPopularPosts] = useState<Post[]>(() => getCachedPopularPosts() || []);
+  const [isLoading, setIsLoading] = useState(() => !getCachedPosts());
   const [error, setError] = useState<string | null>(null);
 
-  const categories = useMemo(
-    () => ['All', 'AI & ML', 'Security', 'Data', 'Cloud & DevOps', 'Web'],
-    []
-  );
+  const categories = useMemo(() => {
+    const configuredTopics = getAllTopicNames();
+    const dynamicTopics = Array.from(new Set(posts.map((p) => p.category).filter(Boolean)));
+    const combined = ['All'];
+    for (const cat of [...configuredTopics.slice(1), ...dynamicTopics]) {
+      if (!combined.includes(cat)) {
+        combined.push(cat);
+      }
+    }
+    return combined;
+  }, [posts]);
 
   const topicParam = searchParams.get('topic');
 
@@ -41,7 +51,9 @@ export const Home: React.FC = () => {
   }, [topicParam, categories]);
 
   const loadData = useCallback(async () => {
-    setIsLoading(true);
+    if (!getCachedPosts()) {
+      setIsLoading(true);
+    }
     setError(null);
     try {
       const [fetchedPosts, fetchedPopular] = await Promise.all([
@@ -85,7 +97,7 @@ export const Home: React.FC = () => {
     const rest = filtered.filter((p) => !p.featured);
 
     if (selectedCategory === 'All') {
-      return { topPosts: tops, listedPosts: rest };
+      return { topPosts: tops, listedPosts: rest.slice(0, LATEST_POSTS_LIMIT) };
     }
     // When filtered by topic, top stories grid is hidden, and all posts show in latest list
     return { topPosts: [], listedPosts: filtered };
@@ -105,6 +117,12 @@ export const Home: React.FC = () => {
           content="Engineering, AI and security writing for people who build and run software."
         />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nightwatch Tech" />
+        <meta
+          name="twitter:description"
+          content="Engineering, AI and security writing for people who build and run software."
+        />
       </Helmet>
 
       <Hero onCtaClick={handleHeroCta} />
