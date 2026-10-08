@@ -15,6 +15,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
 
   return (
     <section className={`band ${styles.hero}`} aria-label="Hero Introduction">
+      <h1 className="sr-only">Nightwatch Tech &mdash; Engineering, AI and Security Writing</h1>
       <div className={styles.copy}>
         <p>
           Engineering, AI and security writing for people who build and run software. One clear

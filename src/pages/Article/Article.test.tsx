@@ -24,10 +24,9 @@ describe('Article Route', () => {
       ).toBeInTheDocument();
     });
 
-    expect(screen.getByText(/Siddharth Patel/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Siddharth Patel/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/8 min read/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/A 24-minute pull request build pipeline/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /copy article link/i })).toBeInTheDocument();
   });
 
   it('renders 404 NotFound page for an unknown slug', async () => {

@@ -88,4 +88,14 @@
 .subscribeBtn {
   width: 100%;
   text-align: center;
+  background: transparent;
+  color: var(--white);
+  border: none;
+  transition: color var(--transition-fast);
+}
+
+.subscribeBtn:hover {
+  background: transparent;
+  color: var(--blood);
+  border: none;
 }

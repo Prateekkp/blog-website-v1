@@ -1,42 +1,87 @@
-.container {
-  padding-block: var(--space-3xl) var(--space-5xl);
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--dim);
-  margin-bottom: var(--space-xl);
-  min-height: var(--touch-target-min);
-  transition: color var(--transition-fast);
+.skeletonContainer {
+  padding-block: calc(var(--space-5xl) + 2rem) var(--space-5xl);
+  max-width: var(--max-text-width);
+  margin-inline: auto;
 }
 
-.backLink:hover {
-  color: var(--white);
-}
-
-.header {
+/* Batman Hero Section for Article */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 1.25rem;
+  padding-top: calc(4.5rem + 1rem);
+  background-color: var(--soot);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, cover;
+  /* Mobile-first: Batman balanced in center with slightly reduced upper gap */
+  background-position: center top, 50% -35px;
+  background-image: 
+    linear-gradient(
+      to bottom,
+      rgba(20, 8, 9, 0.75) 0%,
+      rgba(20, 8, 9, 0.15) 25%,
+      rgba(20, 8, 9, 0.6) 55%,
+      rgba(20, 8, 9, 0.94) 86%,
+      var(--soot) 100%
+    ),
+    url('../../assets/batman-post.webp');
   border-bottom: var(--border-thin);
-  padding-bottom: var(--space-xl);
-  margin-bottom: var(--space-2xl);
+}
+
+.heroInner {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.heroBottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  text-align: left;
+}
+
+.badgeWrapper {
+  margin-bottom: var(--space-2xs);
+}
+
+.categoryBadge {
+  display: inline-block;
 }
 
 .category {
   display: inline-block;
-  margin-bottom: var(--space-xs);
+  background-color: var(--blood);
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.9rem;
 }
 
 .title {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
   line-height: 1.05;
-  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
   color: var(--white);
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0;
 }
 
 .metaRow {
@@ -45,112 +90,262 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.metaInfo {
+.authorMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.avatarCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blood), var(--blood-deep));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.authorNameRow {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-sm);
-  color: var(--dim);
-  font-size: 1rem;
-}
-
-.author {
-  color: var(--ash);
-  font-weight: 600;
-}
-
-.shareBtn {
-  background: var(--char);
-  border: var(--border-chip);
-  color: var(--ash);
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 1.05rem;
-  padding: 0.4rem 1.1rem;
-  min-height: var(--touch-target-min);
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
-  display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-xs);
 }
 
-.shareBtn:hover {
-  background: var(--line);
+.author {
   color: var(--white);
-}
-
-.shareFeedback {
-  color: var(--blood);
   font-weight: 700;
+  font-size: 1.05rem;
 }
 
-/* Article Body Typography (capped at 70ch, line-height 1.7) */
+.authorRole {
+  color: var(--dim);
+  font-size: 0.9rem;
+}
+
+.postMetaSub {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--dim);
+  font-size: 0.92rem;
+}
+
+.bullet {
+  color: var(--dim);
+}
+
+/* Tablet Enhancement */
+@media (min-width: 600px) {
+  .hero {
+    background-position: center top, 72% top;
+  }
+}
+
+/* Desktop Enhancement */
+@media (min-width: 900px) {
+  .hero {
+    background-position: center top, right top;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    background-position: center top, right center;
+  }
+}
+
+/* Main Content Area */
+.contentBand {
+  padding-block: var(--space-3xl) var(--space-5xl);
+  background-color: var(--soot);
+}
+
+.mainContainer {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Body Typography */
 .body {
-  max-width: var(--max-text-width);
-  line-height: 1.7;
-  font-size: 1.125rem;
+  line-height: 1.75;
+  font-size: 1.15rem;
   color: var(--ash);
   margin-bottom: var(--space-5xl);
 }
 
 .body p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
-.body h2,
+.body p:first-of-type {
+  font-size: 1.25rem;
+  line-height: 1.75;
+  color: #f3e9e6;
+}
+
+.body h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  margin-top: 3.25rem;
+  margin-bottom: 1.2rem;
+  color: var(--white);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
 .body h3 {
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.8rem;
   color: var(--white);
 }
 
 .body pre {
-  background-color: var(--char);
-  border-left: var(--border-thick);
-  padding: 1.25rem;
+  background-color: #170b0d;
+  border: 1px solid #331518;
+  border-left: 4px solid var(--blood);
+  border-radius: 4px;
+  padding: 1.35rem;
   overflow-x: auto;
   font-family: Consolas, Monaco, 'Courier New', monospace;
   font-size: 0.95rem;
-  line-height: 1.5;
-  margin-block: 1.75rem;
+  line-height: 1.6;
+  margin-block: 2rem;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .body code {
-  background-color: var(--char);
-  padding: 0.2rem 0.4rem;
+  background-color: #241113;
+  border: 1px solid #3a1c1f;
+  border-radius: 3px;
+  padding: 0.2rem 0.45rem;
   font-family: Consolas, Monaco, 'Courier New', monospace;
   font-size: 0.9em;
+  color: #ff9da1;
 }
 
 .body pre code {
   background: none;
+  border: none;
   padding: 0;
+  color: var(--ash);
+}
+
+.body strong {
+  color: var(--white);
+  font-weight: 700;
 }
 
 .body ul,
 .body ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding-left: 1.75rem;
+  margin-bottom: 1.75rem;
 }
 
 .body li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
-/* Related Articles Section */
+/* Author Card */
+.authorCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: #1c0c0e;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blood);
+  border-radius: 4px;
+  margin-bottom: var(--space-4xl);
+}
+
+.authorCardAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blood), var(--blood-deep));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.authorCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.authorCardName {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--white);
+  margin: 0;
+}
+
+.authorCardRole {
+  font-size: 0.95rem;
+  color: var(--blood);
+  font-weight: 600;
+  margin: 0;
+}
+
+.authorCardBio {
+  font-size: 0.95rem;
+  color: var(--dim);
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}
+
+/* Related Section */
 .related {
-  border-top: var(--border-thick);
+  border-top: var(--border-thin);
   padding-top: var(--space-3xl);
-  margin-top: var(--space-5xl);
+  margin-top: var(--space-3xl);
 }
 
 .relatedHeading {
+  font-family: var(--display);
   font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800;
   margin-bottom: var(--space-xl);
+  color: var(--white);
 }
 
 .relatedGrid {
@@ -159,7 +354,7 @@
   gap: var(--space-xl);
 }
 
-@media (min-width: 600px) {
+@media (min-width: 640px) {
   .relatedGrid {
     grid-template-columns: 1fr 1fr;
   }

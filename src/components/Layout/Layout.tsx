@@ -10,14 +10,14 @@ export interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const hasHero = location.pathname === '/' || location.pathname.startsWith('/post/');
 
   return (
     <div className={styles.layoutWrapper}>
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
-      <Navbar isInnerPage={!isHome} />
+      <Navbar isInnerPage={!hasHero} />
       <main id="main-content" className={styles.mainContent} tabIndex={-1}>
         {children}
       </main>

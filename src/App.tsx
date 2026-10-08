@@ -1,15 +1,10 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout/Layout';
 import { Skeleton } from './components/Skeleton/Skeleton';
-
-// Code-split routes with React.lazy
-const Home = lazy(() => import('./pages/Home/Home'));
-const Article = lazy(() => import('./pages/Article/Article'));
-const Topic = lazy(() => import('./pages/Topic/Topic'));
-const About = lazy(() => import('./pages/About/About'));
-const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
+import { APP_ROUTES } from './config/routes';
 
 const PageLoader: React.FC = () => (
   <div className="band" style={{ padding: '3rem 0' }}>
@@ -21,14 +16,20 @@ export const App: React.FC = () => {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Layout>
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/post/:slug" element={<Article />} />
-              <Route path="/topic/:slug" element={<Topic />} />
-              <Route path="/about" element={<About />} />
-              <Route path="*" element={<NotFound />} />
+              {APP_ROUTES.map((route) => {
+                const Component = route.component;
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={<Component />}
+                  />
+                );
+              })}
             </Routes>
           </Suspense>
         </Layout>

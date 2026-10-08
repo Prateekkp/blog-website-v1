@@ -1,5 +1,5 @@
 .container {
-  padding-block: var(--space-5xl);
+  padding-block: calc(var(--space-5xl) + 2rem) var(--space-5xl);
   max-width: var(--max-text-width);
   margin-inline: auto;
   text-align: center;

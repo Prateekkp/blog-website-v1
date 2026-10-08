@@ -36,3 +36,23 @@
   color: var(--soot);
   border-color: var(--white);
 }
+
+/* Mobile: smooth horizontal swipeable chips instead of multiline stacking */
+@media (max-width: 640px) {
+  .topics {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-block: 0.85rem;
+  }
+
+  .topics::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
