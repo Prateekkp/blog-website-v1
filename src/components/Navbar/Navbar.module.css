@@ -45,6 +45,16 @@
   cursor: pointer;
   padding: var(--space-2xs);
   text-shadow: var(--shadow-nav);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  outline: none;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.hamburger:active {
+  transform: scale(0.92);
 }
 
 .hamburgerIcon {
@@ -61,6 +71,11 @@
   height: 2px;
   background-color: var(--white);
   border-radius: 1px;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.hamburger:hover .hamburgerLine {
+  background-color: var(--ash);
 }
 
 /* Desktop navigation links hidden on mobile */

@@ -7,6 +7,24 @@
   flex-direction: column;
   padding: calc(var(--safe-top) + 1.25rem) var(--gutter) calc(var(--safe-bottom) + 1.25rem);
   overflow-y: auto;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  animation: slideDownFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .header {
@@ -24,6 +42,8 @@
   font-size: 1.65rem;
   letter-spacing: 0.03em;
   color: var(--white);
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 .closeButton {
@@ -39,11 +59,19 @@
   justify-content: center;
   cursor: pointer;
   padding: var(--space-xs);
-  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  outline: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .closeButton:hover {
   color: var(--blood);
+  transform: rotate(90deg);
+}
+
+.closeButton:active {
+  transform: scale(0.9) rotate(90deg);
 }
 
 .nav {
@@ -72,12 +100,20 @@
   min-height: var(--touch-target-min);
   line-height: var(--touch-target-min);
   border-bottom: 2px solid transparent;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  outline: none;
+  transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 
-.navLink:hover {
+.navLink:hover,
+.navLink:focus-visible {
   color: var(--blood);
   border-color: var(--blood);
+}
+
+.navLink:active {
+  transform: translateX(4px);
 }
 
 .subscribeContainer {
@@ -91,11 +127,18 @@
   background: transparent;
   color: var(--white);
   border: none;
-  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
-.subscribeBtn:hover {
+.subscribeBtn:hover,
+.subscribeBtn:focus-visible {
   background: transparent;
   color: var(--blood);
   border: none;
+}
+
+.subscribeBtn:active {
+  transform: scale(0.98);
 }

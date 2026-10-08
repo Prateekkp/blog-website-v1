@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { getPostsByCategory } from '../../services/api';
+import { getPostsByCategory, getCachedPostsByCategory } from '../../services/api';
 import { Post } from '../../types/post';
 import { categoryFromSlug } from '../../utils/slugify';
 import { getTopicBySlug, getTopicByName } from '../../config/topics';
@@ -11,8 +11,6 @@ import styles from './Topic.module.css';
 
 export const Topic: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const matchedTopic = slug ? getTopicBySlug(slug) : undefined;
   const categoryName = matchedTopic ? matchedTopic.name : slug ? categoryFromSlug(slug) : 'All';
@@ -21,9 +19,17 @@ export const Topic: React.FC = () => {
     getTopicByName(categoryName)?.description ||
     `Articles and technical guides in ${categoryName}.`;
 
+  const [posts, setPosts] = useState<Post[]>(() => getCachedPostsByCategory(categoryName));
+  const [isLoading, setIsLoading] = useState(
+    () => getCachedPostsByCategory(categoryName).length === 0
+  );
+
   useEffect(() => {
     let isMounted = true;
-    setIsLoading(true);
+    const cached = getCachedPostsByCategory(categoryName);
+    if (cached.length === 0) {
+      setIsLoading(true);
+    }
 
     getPostsByCategory(categoryName).then((fetched) => {
       if (!isMounted) return;

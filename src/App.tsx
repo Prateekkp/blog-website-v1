@@ -2,13 +2,29 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout/Layout';
-import { Skeleton } from './components/Skeleton/Skeleton';
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
 import { APP_ROUTES } from './config/routes';
 
 const PageLoader: React.FC = () => (
-  <div className="band" style={{ padding: '3rem 0' }}>
-    <Skeleton count={4} />
+  <div
+    className="band"
+    style={{
+      minHeight: '40vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <div
+      style={{
+        width: '28px',
+        height: '28px',
+        border: '3px solid var(--line)',
+        borderTopColor: 'var(--blood)',
+        borderRadius: '50%',
+        animation: 'spin 0.6s linear infinite',
+      }}
+    />
   </div>
 );
 

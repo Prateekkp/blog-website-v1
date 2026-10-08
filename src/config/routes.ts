@@ -11,8 +11,10 @@ export interface RouteConfig {
   title?: string;
 }
 
-// Code-split route components
-const Home = lazy(() => import('../pages/Home/Home'));
+// Primary landing route is eagerly loaded for instantaneous first paint
+import { Home } from '../pages/Home/Home';
+
+// Secondary routes remain code-split
 const Article = lazy(() => import('../pages/Article/Article'));
 const Topic = lazy(() => import('../pages/Topic/Topic'));
 const About = lazy(() => import('../pages/About/About'));

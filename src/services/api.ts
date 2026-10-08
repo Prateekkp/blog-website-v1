@@ -7,45 +7,43 @@ import { Post } from '../types/post';
 const delay = (ms = 40): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-let postsCache: Post[] | null = null;
-let popularPostsCache: Post[] | null = null;
+let postsCache: Post[] = [...POSTS];
+let popularPostsCache: Post[] = POSTS.slice(0, 5).map((p) => ({ ...p }));
 
-export function getCachedPosts(): Post[] | null {
-  return postsCache ? [...postsCache] : null;
+export function getCachedPosts(): Post[] {
+  return [...postsCache];
 }
 
-export function getCachedPopularPosts(): Post[] | null {
-  return popularPostsCache ? [...popularPostsCache] : null;
+export function getCachedPopularPosts(count = 5): Post[] {
+  return popularPostsCache.slice(0, count).map((p) => ({ ...p }));
+}
+
+export function getCachedPostBySlug(slug: string): Post | null {
+  const post = postsCache.find((p) => p.slug === slug);
+  return post ? { ...post } : null;
+}
+
+export function getCachedPostsByCategory(category: string): Post[] {
+  if (category === 'All') {
+    return [...postsCache];
+  }
+  return postsCache.filter((p) => p.category.toLowerCase() === category.toLowerCase());
 }
 
 export async function getPosts(): Promise<Post[]> {
-  if (!postsCache) {
-    await delay();
-    postsCache = [...POSTS];
-  }
   return [...postsCache];
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  await delay();
-  const post = POSTS.find((p) => p.slug === slug);
-  return post ? { ...post } : null;
+  return getCachedPostBySlug(slug);
 }
 
 export async function getPostsByCategory(category: string): Promise<Post[]> {
-  const all = await getPosts();
-  if (category === 'All') {
-    return all;
-  }
-  return all.filter((p) => p.category.toLowerCase() === category.toLowerCase());
+  return getCachedPostsByCategory(category);
 }
 
 export async function getPopularPosts(count = 5): Promise<Post[]> {
-  if (!popularPostsCache) {
-    await delay();
-    popularPostsCache = POSTS.slice(0, count).map((p) => ({ ...p }));
-  }
-  return [...popularPostsCache];
+  return getCachedPopularPosts(count);
 }
 
 /**
@@ -62,9 +60,9 @@ export function registerPost(newPost: Post): void {
   } else {
     POSTS.unshift(newPost);
   }
-  // Invalidate in-memory caches
-  postsCache = null;
-  popularPostsCache = null;
+  // Refresh in-memory caches
+  postsCache = [...POSTS];
+  popularPostsCache = POSTS.slice(0, 5).map((p) => ({ ...p }));
 }
 
 export interface SubscribeResponse {
