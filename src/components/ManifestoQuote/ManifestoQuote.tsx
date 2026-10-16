@@ -7,7 +7,7 @@ export interface ManifestoQuoteProps {
 }
 
 export const ManifestoQuote: React.FC<ManifestoQuoteProps> = ({
-  quote = 'Nightwatch is for the brave who build in the shadows and hold the line when production breaks at 3 AM.',
+  quote = "WE'VE SEEN SUPERMAN WITH ALL HIS POWERS... BUT WE STILL CHOSE BATMAN",
   caption = 'Vigilance in Engineering & Security',
 }) => {
   return (
