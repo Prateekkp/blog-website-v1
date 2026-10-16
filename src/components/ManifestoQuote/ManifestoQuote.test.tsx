@@ -7,7 +7,7 @@ describe('ManifestoQuote', () => {
     render(<ManifestoQuote />);
 
     expect(
-      screen.getByText(/Nightwatch is for the brave who build in the shadows/i)
+      screen.getByText(/WE'VE SEEN SUPERMAN WITH ALL HIS POWERS\.\.\. BUT WE STILL CHOSE BATMAN/i)
     ).toBeInTheDocument();
     expect(screen.getByText(/Vigilance in Engineering & Security/i)).toBeInTheDocument();
   });
