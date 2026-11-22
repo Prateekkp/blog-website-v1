@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    image: doc110010/blog-app:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
