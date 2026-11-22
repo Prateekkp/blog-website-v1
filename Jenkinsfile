@@ -26,11 +26,14 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                echo "Pushing images to Docker Hub..."
-                sh """
-                    docker push ${DOCKER_HUB_REPO}:${IMAGE_TAG}
-                    docker push ${DOCKER_HUB_REPO}:latest
-                """
+                echo "Authenticating and pushing images to Docker Hub..."
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                        echo "\$DOCKER_PASS" | docker login -u "\$DOCKER_USER" --password-stdin
+                        docker push ${DOCKER_HUB_REPO}:${IMAGE_TAG}
+                        docker push ${DOCKER_HUB_REPO}:latest
+                    """
+                }
             }
         }
 
